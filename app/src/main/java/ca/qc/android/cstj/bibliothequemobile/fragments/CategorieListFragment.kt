@@ -11,9 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
-import ca.qc.android.cstj.bibliothequemobile.adapters.CategorieRecyclerViewAdapter
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
+
 
 /**
  * A fragment representing a list of Items.
@@ -51,7 +50,7 @@ class CategorieListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = CategorieRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+            view.adapter = InformationUniqueRecyclerViewAdapter(DummyContent.ITEMS, mListener)
         }
         return view
     }

@@ -14,7 +14,7 @@ import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyI
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class SuccursaleRecyclerViewAdapter(private val mValues:List<DummyItem>, private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<SuccursaleRecyclerViewAdapter.ViewHolder>() {
+class InformationUniqueRecyclerViewAdapter(private val mValues:List<DummyItem>, private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<InformationUniqueRecyclerViewAdapter.ViewHolder>() {
 
     public override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         val view = LayoutInflater.from(parent.getContext())

@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
-import ca.qc.android.cstj.bibliothequemobile.adapters.SuccursaleRecyclerViewAdapter
+import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
 
@@ -52,7 +52,7 @@ class SuccursaleListFragment : Fragment() {
             } else {
                 recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            recyclerView.adapter = SuccursaleRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+            recyclerView.adapter = InformationUniqueRecyclerViewAdapter(DummyContent.ITEMS, mListener)
         }
         return view
     }
