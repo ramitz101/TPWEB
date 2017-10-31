@@ -12,6 +12,12 @@ import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
+import ca.qc.android.cstj.bibliothequemobile.helpers.CATEGORIE_URL
+import ca.qc.android.cstj.bibliothequemobile.models.Categorie
+import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+import com.github.kittinunf.fuel.android.core.Json
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.httpGet
 
 
 /**
@@ -50,9 +56,23 @@ class CategorieListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = InformationUniqueRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+
+            // Récuperer les catégories de l'API
+            CATEGORIE_URL.httpGet().responseJson{request, response, result ->
+                view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
+            }
         }
         return view
+    }
+
+    fun createCategorieList(json: Json) : List<Categorie>{
+        var categories = mutableListOf<Categorie>()
+        val tabJson = json.array()
+        for (i in 0.. (tabJson.length() -1))
+        {
+            categories.add(Categorie(Json(tabJson[i].toString())))
+        }
+        return categories
     }
 
 
@@ -81,7 +101,7 @@ class CategorieListFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem)
+        f//un onListFragmentInteraction(item: DummyItem)
     }
 
     companion object {
