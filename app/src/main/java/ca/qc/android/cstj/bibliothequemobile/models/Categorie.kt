@@ -8,10 +8,10 @@ import ca.qc.android.cstj.bibliothequemobile.models.Item
  */
 class Categorie(jsonObject: Json) : Item() {
     override fun getAffichage():String {
-        return categorie
+        return nom
     }
 
     var categorieId : String = jsonObject.obj().getString("idCategorie")
     var categorieUUID : String = jsonObject.obj().getString("uuid")
-    var categorie : String = jsonObject.obj().getString("categorie")
+    var nom : String = jsonObject.obj().getString("categorie")
 }

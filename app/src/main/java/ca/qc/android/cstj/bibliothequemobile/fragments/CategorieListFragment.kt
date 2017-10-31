@@ -14,7 +14,7 @@ import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
 import ca.qc.android.cstj.bibliothequemobile.helpers.CATEGORIE_URL
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
-import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
@@ -101,7 +101,7 @@ class CategorieListFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        f//un onListFragmentInteraction(item: DummyItem)
+        //un onListFragmentInteraction(item: DummyItem)
     }
 
     companion object {

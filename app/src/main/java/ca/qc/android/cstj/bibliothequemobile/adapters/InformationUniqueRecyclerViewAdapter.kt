@@ -8,7 +8,9 @@ import android.widget.TextView
 import ca.qc.android.cstj.bibliothequemobile.R
 
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment.OnListFragmentInteractionListener
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.models.Item
+import kotlinx.android.synthetic.main.card_item.view.*
+
 
 /**
  * [RecyclerView.Adapter] that can display a [Item] and makes a call to the
@@ -20,14 +22,12 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
 
     public override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         val view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_succursale, parent, false)
+                .inflate(R.layout.card_item, parent, false)
         return ViewHolder(view)
     }
 
     public override fun onBindViewHolder(holder: ViewHolder, position:Int) {
-        holder.mItem = mValues.get(position)
-        holder.mIdView.setText(mValues.get(position).id)
-        holder.mContentView.setText(mValues.get(position).content)
+        holder.bind(mValues[position])
 
         holder.mView.setOnClickListener(object:View.OnClickListener {
             public override fun onClick(v:View) {
@@ -47,24 +47,15 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
 
     inner class ViewHolder( val mView:View):RecyclerView.ViewHolder(mView) {
 
-        var lblNomSuccursale = mView.lblNomPokemon
-
-        var pokemon: Pokemon? = null
+        var lblNom = mView.lblNom
         var mItem:Item? = null
-        if (mItem === Succursale)
-        {
 
-        }else{
-
-        }
-        init{
-            mIdView = mView.findViewById(R.id.id) as TextView
-            mContentView = mView.findViewById(R.id.content) as TextView
+        fun bind(item: Item) {
+            //this.it = item
+            lblNom.text = item.getAffichage()
         }
 
-        public override fun toString():String {
-            return super.toString() + " '" + mContentView.getText() + "'"
-        }
+
 
 
     }
