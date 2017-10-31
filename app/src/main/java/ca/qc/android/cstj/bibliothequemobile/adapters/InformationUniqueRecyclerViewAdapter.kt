@@ -11,7 +11,7 @@ import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment.On
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [Item] and makes a call to the
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
@@ -20,7 +20,7 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
 
     public override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         val view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_succursale, parent, false)
+                .inflate(R.layout.card_succursale, parent, false)
         return ViewHolder(view)
     }
 
@@ -46,10 +46,17 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
     }
 
     inner class ViewHolder( val mView:View):RecyclerView.ViewHolder(mView) {
-        val mIdView:TextView
-        val mContentView:TextView
-        var mItem:DummyItem? = null
 
+        var lblNomSuccursale = mView.lblNomPokemon
+
+        var pokemon: Pokemon? = null
+        var mItem:Item? = null
+        if (mItem === Succursale)
+        {
+
+        }else{
+
+        }
         init{
             mIdView = mView.findViewById(R.id.id) as TextView
             mContentView = mView.findViewById(R.id.content) as TextView
@@ -58,5 +65,7 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
         public override fun toString():String {
             return super.toString() + " '" + mContentView.getText() + "'"
         }
+
+
     }
 }
