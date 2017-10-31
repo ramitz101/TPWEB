@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import ca.qc.android.cstj.bibliothequemobile.R
 
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment.OnListFragmentInteractionListener
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
@@ -14,7 +15,8 @@ import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyI
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class InformationUniqueRecyclerViewAdapter(private val mValues:List<DummyItem>, private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<InformationUniqueRecyclerViewAdapter.ViewHolder>() {
+class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
+                                           private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<InformationUniqueRecyclerViewAdapter.ViewHolder>() {
 
     public override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         val view = LayoutInflater.from(parent.getContext())
