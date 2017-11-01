@@ -37,7 +37,7 @@ class CategorieListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle): View? {
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_categorie_list, container, false)
 
         // Set the adapter
@@ -51,7 +51,7 @@ class CategorieListFragment : Fragment() {
 
             // Récuperer les catégories de l'API
             CATEGORIE_URL.httpGet().responseJson{request, response, result ->
-                //view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
+                view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
             }
         }
         return view

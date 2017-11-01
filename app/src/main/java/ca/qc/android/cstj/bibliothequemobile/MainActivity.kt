@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
+import ca.qc.android.cstj.bibliothequemobile.fragments.CategorieListFragment
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.bibliothequemobile.models.Item
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +37,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
+        transaction.commit()
+
     }
 
     override fun onBackPressed() {
@@ -75,7 +81,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }.run()
             }
             R.id.nav_categorie -> {
-
+                Runnable {
+                    val transaction = fragmentManager.beginTransaction()
+                    //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+                    transaction.addToBackStack("ListeCatégorie")
+                    transaction.commit()
+                }.run()
             }
         }
 
