@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="ca.qc.android.cstj.bibliothequemobile.fragments.CategorieListFragment"
-    tools:listitem="@layout/fragment_categorie" />
+    tools:listitem="@layout/card_item" />

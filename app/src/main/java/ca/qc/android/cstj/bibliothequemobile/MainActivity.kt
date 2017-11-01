@@ -49,6 +49,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
+        transaction.commit()
+
     }
 
     override fun onBackPressed() {
