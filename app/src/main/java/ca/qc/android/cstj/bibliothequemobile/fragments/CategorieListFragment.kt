@@ -12,29 +12,21 @@ import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
+import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
 import ca.qc.android.cstj.bibliothequemobile.helpers.CATEGORIE_URL
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
+
 
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
 
 
-/**
- * A fragment representing a list of Items.
- *
- *
- * Activities containing this fragment MUST implement the [OnListFragmentInteractionListener]
- * interface.
- */
-/**
- * Mandatory empty constructor for the fragment manager to instantiate the
- * fragment (e.g. upon screen orientation changes).
- */
+
 class CategorieListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
+    private var mListener: OnListFragmentInformationUnique? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +51,7 @@ class CategorieListFragment : Fragment() {
 
             // Récuperer les catégories de l'API
             CATEGORIE_URL.httpGet().responseJson{request, response, result ->
-                view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
+                //view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
             }
         }
         return view
@@ -78,7 +70,7 @@ class CategorieListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is OnListFragmentInformationUnique) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
@@ -88,20 +80,6 @@ class CategorieListFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mListener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        //un onListFragmentInteraction(item: DummyItem)
     }
 
     companion object {

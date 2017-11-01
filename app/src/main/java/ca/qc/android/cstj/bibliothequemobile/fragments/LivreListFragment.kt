@@ -12,10 +12,12 @@ import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.LivreRecyclerViewAdapter
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.helpers.LIVRE_URL
+
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 import com.github.kittinunf.fuel.android.core.Json
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.httpGet
 
 /**
  * A fragment representing a list of Items.
@@ -53,7 +55,10 @@ class LivreListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = LivreRecyclerViewAdapter(createLivreList(result.get()), mListener)
+            LIVRE_URL.httpGet().responseJson { request, response, result ->
+
+                view.adapter = LivreRecyclerViewAdapter(createLivreList(result.get()), mListener)
+            }
         }
         return view
     }

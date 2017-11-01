@@ -12,10 +12,11 @@ import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
 import ca.qc.android.cstj.bibliothequemobile.helpers.SUCCURSALE_URL
+
 import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
@@ -24,7 +25,7 @@ import com.github.kittinunf.fuel.httpGet
 class SuccursaleListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
+    private var mListener: OnListFragmentInformationUnique? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class SuccursaleListFragment : Fragment() {
         return view
     }
 
-    fun createSuccursaleList(json: Json):List<Succursale>{
+    fun createSuccursaleList(json: Json) : List<Succursale>{
         var succursales = mutableListOf<Succursale>()
         val tabJson = json.array()
 
@@ -70,7 +71,7 @@ class SuccursaleListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is OnListFragmentInformationUnique) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
@@ -82,19 +83,6 @@ class SuccursaleListFragment : Fragment() {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem)
-    }
 
     companion object {
 

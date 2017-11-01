@@ -8,10 +8,19 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
+import ca.qc.android.cstj.bibliothequemobile.models.Item
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique {
+
+    override fun onListFragmentInteraction(item: Item?) {
+        //Succursale
+
+        //Categorie
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
