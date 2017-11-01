@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val transaction = fragmentManager.beginTransaction()
                     //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                     transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
-                    transaction.addToBackStack("ListeCatégorie")
+                    transaction.addToBackStack("ListeCategorie")
                     transaction.commit()
                 }.run()
             }
