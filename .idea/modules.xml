@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BIbliothequeMobile.iml" filepath="$PROJECT_DIR$/BIbliothequeMobile.iml" />
+      <module fileurl="file://D:\TPWEB\BIbliothequeMobile.iml" filepath="D:\TPWEB\BIbliothequeMobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TPWEB.iml" filepath="$PROJECT_DIR$/TPWEB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\TPWEB\app\app.iml" filepath="D:\TPWEB\app\app.iml" />
     </modules>
   </component>
 </project>
