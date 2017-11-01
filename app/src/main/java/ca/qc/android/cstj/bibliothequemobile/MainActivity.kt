@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.uuid))
+                transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.href))
                 transaction.addToBackStack("DetailsSuccursale")
                 transaction.commit()
             }.run()

@@ -6,8 +6,10 @@ import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
+import ca.qc.android.cstj.bibliothequemobile.helpers.SUCCURSALE_URL
 import ca.qc.android.cstj.bibliothequemobile.helpers.URL_BASE
 import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 import com.github.kittinunf.fuel.android.extension.responseJson
@@ -16,19 +18,20 @@ import kotlinx.android.synthetic.main.fragment_succursale_details.*
 import kotlinx.android.synthetic.main.fragment_succursale_details.view.*
 
 
-class SuccursaleDetailsFragment(private val uuid:String) : Fragment() {
+class SuccursaleDetailsFragment(private val href:String) : Fragment() {
 
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val url = "$URL_BASE$uuid"
+        val url = href
         url.httpGet().responseJson { request, response, result ->
             when(response.httpStatusCode){
                 200-> {
                     val succursale = Succursale(result.get())
-                    lblNom.text = succursale.nom
+                    lblNomSuccursale.text = succursale.nom
+                    //Toast.makeText(activity.applicationContext,"hahahahaha",Toast.LENGTH_LONG).show()
                 }
                 404 ->{
 

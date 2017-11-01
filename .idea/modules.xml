@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://D:\TPWEB\BIbliothequeMobile.iml" filepath="D:\TPWEB\BIbliothequeMobile.iml" />
-      <module fileurl="file://D:\tpWeb\TPWEB.iml" filepath="D:\tpWeb\TPWEB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\tpWeb\app\app.iml" filepath="D:\tpWeb\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tpWeb.iml" filepath="$PROJECT_DIR$/tpWeb.iml" />
     </modules>
   </component>
