@@ -11,7 +11,6 @@ class Categorie(jsonObject: Json) : Item() {
         return nom
     }
 
-    var categorieId : String = jsonObject.obj().getString("idCategorie")
-    var categorieUUID : String = jsonObject.obj().getString("uuid")
+
     var nom : String = jsonObject.obj().getString("categorie")
 }

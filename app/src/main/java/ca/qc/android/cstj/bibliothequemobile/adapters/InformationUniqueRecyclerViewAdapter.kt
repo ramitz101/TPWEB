@@ -14,11 +14,7 @@ import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 import kotlinx.android.synthetic.main.card_item.view.*
 
 
-/**
- * [RecyclerView.Adapter] that can display a [Item] and makes a call to the
- * specified [OnListFragmentInformationUnique].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
                                            private val mListener:OnListFragmentInformationUnique?):RecyclerView.Adapter<InformationUniqueRecyclerViewAdapter.ViewHolder>() {
 
