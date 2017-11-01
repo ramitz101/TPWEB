@@ -14,6 +14,8 @@ import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.LivreRecyclerViewAdapter
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.models.Livre
+import com.github.kittinunf.fuel.android.core.Json
 
 /**
  * A fragment representing a list of Items.
@@ -51,9 +53,22 @@ class LivreListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = LivreRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+            view.adapter = LivreRecyclerViewAdapter(createLivreList(result.get()), mListener)
         }
         return view
+    }
+
+    fun createLivreList(json: Json) : List<Livre> {
+
+        var livres = mutableListOf<Livre>()
+        val tabJson = json.array()
+
+        for(i in 0.. (tabJson.length() -1 )) {
+            livres.add(Livre(Json(tabJson[i].toString())))
+        }
+
+        return livres
+
     }
 
 
@@ -82,7 +97,7 @@ class LivreListFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem)
+        fun onListFragmentInteraction(item: Livre?)
     }
 
     companion object {

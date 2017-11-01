@@ -5,27 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import ca.qc.android.cstj.bibliothequemobile.R
 
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment.OnListFragmentInteractionListener
-import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.models.Item
+import kotlinx.android.synthetic.main.card_item.view.*
+
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [Item] and makes a call to the
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class SuccursaleRecyclerViewAdapter(private val mValues:List<DummyItem>, private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<SuccursaleRecyclerViewAdapter.ViewHolder>() {
+class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
+                                           private val mListener:OnListFragmentInteractionListener?):RecyclerView.Adapter<InformationUniqueRecyclerViewAdapter.ViewHolder>() {
 
     public override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         val view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_succursale, parent, false)
+                .inflate(R.layout.card_item, parent, false)
         return ViewHolder(view)
     }
 
     public override fun onBindViewHolder(holder: ViewHolder, position:Int) {
-        holder.mItem = mValues.get(position)
-        holder.mIdView.setText(mValues.get(position).id)
-        holder.mContentView.setText(mValues.get(position).content)
+        holder.bind(mValues[position])
 
         holder.mView.setOnClickListener(object:View.OnClickListener {
             public override fun onClick(v:View) {
@@ -44,17 +46,17 @@ class SuccursaleRecyclerViewAdapter(private val mValues:List<DummyItem>, private
     }
 
     inner class ViewHolder( val mView:View):RecyclerView.ViewHolder(mView) {
-        val mIdView:TextView
-        val mContentView:TextView
-        var mItem:DummyItem? = null
 
-        init{
-            mIdView = mView.findViewById(R.id.id) as TextView
-            mContentView = mView.findViewById(R.id.content) as TextView
+        var lblNom = mView.lblNom
+        var mItem:Item? = null
+
+        fun bind(item: Item) {
+            //this.it = item
+            lblNom.text = item.getAffichage()
         }
 
-        public override fun toString():String {
-            return super.toString() + " '" + mContentView.getText() + "'"
-        }
+
+
+
     }
 }

@@ -11,21 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
-import ca.qc.android.cstj.bibliothequemobile.adapters.SuccursaleRecyclerViewAdapter
+import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent
 import ca.qc.android.cstj.bibliothequemobile.fragments.dummy.DummyContent.DummyItem
+import ca.qc.android.cstj.bibliothequemobile.helpers.SUCCURSALE_URL
+import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+import com.github.kittinunf.fuel.android.core.Json
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.httpGet
 
-/**
- * A fragment representing a list of Items.
- *
- *
- * Activities containing this fragment MUST implement the [OnListFragmentInteractionListener]
- * interface.
- */
-/**
- * Mandatory empty constructor for the fragment manager to instantiate the
- * fragment (e.g. upon screen orientation changes).
- */
+
 class SuccursaleListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
@@ -52,11 +47,26 @@ class SuccursaleListFragment : Fragment() {
             } else {
                 recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            recyclerView.adapter = SuccursaleRecyclerViewAdapter(DummyContent.ITEMS, mListener)
+
+            SUCCURSALE_URL.httpGet().responseJson{request,response,result ->
+                recyclerView.adapter = InformationUniqueRecyclerViewAdapter(createSuccursaleList(result.get()),mListener)
+            }
+
         }
         return view
     }
 
+    fun createSuccursaleList(json: Json):List<Succursale>{
+        var succursales = mutableListOf<Succursale>()
+        val tabJson = json.array()
+
+        for(i in 0.. (json.array().length()-1))
+        {
+            succursales.add(Succursale(Json(tabJson[i].toString())))
+        }
+
+        return succursales
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
