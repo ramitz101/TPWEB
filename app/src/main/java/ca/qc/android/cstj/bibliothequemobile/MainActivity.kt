@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
+import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.bibliothequemobile.models.Item
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -65,7 +66,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_succursale -> {
-                // Handle the camera action
+                Runnable {
+                    val transaction = fragmentManager.beginTransaction()
+                    //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
+                    transaction.addToBackStack("ListeSuccursale")
+                    transaction.commit()
+                }.run()
             }
             R.id.nav_categorie -> {
 

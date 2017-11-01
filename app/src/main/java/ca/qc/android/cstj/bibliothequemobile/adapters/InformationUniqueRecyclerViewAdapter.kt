@@ -36,7 +36,7 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
                 if (null != mListener)
                 {
 
-                        mListener!!.onListFragmentInteraction(holder.succursale)
+                        mListener!!.onListFragmentInteraction(holder.item)
 
 
                 }
@@ -49,15 +49,11 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
     }
 
     inner class ViewHolder( val mView:View):RecyclerView.ViewHolder(mView) {
-        var categorie: Categorie? = null
-        var succursale: Succursale? = null
         var lblNom = mView.lblNom
         var item: Item? = null
 
         fun bind(item: Item) {
             this.item = item
-            this.categorie = categorie
-            this.succursale = succursale
             lblNom.text = item.getAffichage()
         }
 
