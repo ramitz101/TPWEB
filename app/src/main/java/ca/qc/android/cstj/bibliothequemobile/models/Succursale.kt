@@ -8,7 +8,12 @@ class Succursale(jsonObject: Json) : Item() {
         return nom
     }
 
+    override fun getUrl():String {
+        return uuid
+    }
+
     var nom : String = jsonObject.obj().getString("appelatif")
+    var uuid: String = jsonObject.obj().getString("uuid")
     var adresse : String = jsonObject.obj().getString("adresse")
     var ville : String = jsonObject.obj().getString("ville")
     var codePostal : String = jsonObject.obj().getString("codePostal")

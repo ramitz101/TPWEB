@@ -8,33 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.qc.android.cstj.bibliothequemobile.R
+import ca.qc.android.cstj.bibliothequemobile.helpers.URL_BASE
+import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.httpGet
+import kotlinx.android.synthetic.main.fragment_succursale_details.*
+import kotlinx.android.synthetic.main.fragment_succursale_details.view.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SuccursaleDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SuccursaleDetailsFragment : Fragment() {
+class SuccursaleDetailsFragment(private val uuid:String) : Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle): View? {
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        val url = "$URL_BASE$uuid"
+        url.httpGet().responseJson { request, response, result ->
+            when(response.httpStatusCode){
+                200-> {
+                    val succursale = Succursale(result.get())
+                    lblNom.text = succursale.nom
+                }
+                404 ->{
+
+                }
+            }
+        }
+
         return inflater.inflate(R.layout.fragment_succursale_details, container, false)
     }
-
+/*
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,5 +63,5 @@ class SuccursaleDetailsFragment : Fragment() {
             return fragment
         }
     }
-
+*/
 }// Required empty public constructor

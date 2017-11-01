@@ -26,8 +26,10 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
 
      override fun onBindViewHolder(holder: ViewHolder, position:Int) {
         holder.bind(mValues[position])
-
-        holder.mView.setOnClickListener(object:View.OnClickListener {
+         holder.mView.setOnClickListener{
+             mListener!!.onListFragmentInteraction(holder.item)
+         }
+       /* holder.mView.setOnClickListener(object:View.OnClickListener {
             override fun onClick(v:View) {
                 if (null != mListener)
                 {
@@ -37,7 +39,7 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
 
                 }
             }
-        })
+        })*/
     }
 
     override fun getItemCount():Int {
