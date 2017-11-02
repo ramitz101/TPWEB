@@ -20,9 +20,14 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 import ca.qc.android.cstj.bibliothequemobile.fragments.LivreListFragment
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
+import ca.qc.android.cstj.bibliothequemobile.models.Livre
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique, LivreListFragment.OnListFragmentInteractionListener {
+    override fun onListFragmentInteraction(livre: Livre?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    }
 
     override fun onListFragmentInteraction(item: Item?) {
         //Succursale
