@@ -26,6 +26,7 @@ class SuccursaleListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListFragmentInformationUnique? = null
+    private var succursales = mutableListOf<Succursale>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,25 +49,28 @@ class SuccursaleListFragment : Fragment() {
             } else {
                 recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
+            recyclerView.adapter = InformationUniqueRecyclerViewAdapter(succursales, mListener)
 
             SUCCURSALE_URL.httpGet().responseJson{request,response,result ->
-                recyclerView.adapter = InformationUniqueRecyclerViewAdapter(createSuccursaleList(result.get()),mListener)
+                when(response.httpStatusCode){
+                    200 -> {
+                        createSuccursaleList(result.get())
+                        recyclerView.adapter.notifyDataSetChanged()
+                    }
+                }
             }
-
         }
         return view
     }
 
-    fun createSuccursaleList(json: Json) : List<Succursale>{
-        var succursales = mutableListOf<Succursale>()
+    fun createSuccursaleList(json: Json){
+
         val tabJson = json.array()
 
         for(i in 0.. (json.array().length()-1))
         {
             succursales.add(Succursale(Json(tabJson[i].toString())))
         }
-
-        return succursales
     }
 
     override fun onAttach(context: Context) {

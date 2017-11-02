@@ -34,6 +34,8 @@ class LivreListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
+    private var livres = mutableListOf<Livre>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,36 +46,39 @@ class LivreListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle): View? {
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_livre_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
             val context = view.getContext()
+            val recyclerView = view
             if (mColumnCount <= 1) {
-                view.layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = LinearLayoutManager(context)
             } else {
-                view.layoutManager = GridLayoutManager(context, mColumnCount)
+                recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            LIVRE_URL.httpGet().responseJson { request, response, result ->
+            recyclerView.adapter = LivreRecyclerViewAdapter(livres ,mListener)
 
-                view.adapter = LivreRecyclerViewAdapter(createLivreList(result.get()), mListener)
+
+            LIVRE_URL.httpGet().responseJson { request, response, result ->
+                when(response.httpStatusCode){
+                    200->{
+                        createLivreList(result.get())
+                    }
+                }
             }
         }
         return view
     }
 
-    fun createLivreList(json: Json) : List<Livre> {
+    fun createLivreList(json: Json) {
 
-        var livres = mutableListOf<Livre>()
         val tabJson = json.array()
 
         for(i in 0.. (tabJson.length() -1 )) {
             livres.add(Livre(Json(tabJson[i].toString())))
         }
-
-        return livres
-
     }
 
 

@@ -24,9 +24,10 @@ import com.github.kittinunf.fuel.httpGet
 
 
 class CategorieListFragment : Fragment() {
-    // TODO: Customize parameters
+
     private var mColumnCount = 1
     private var mListener: OnListFragmentInformationUnique? = null
+    private var categories = mutableListOf<Categorie>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,33 +39,43 @@ class CategorieListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_categorie_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
             val context = view.getContext()
+            val recyclerView = view
+
             if (mColumnCount <= 1) {
-                view.layoutManager = LinearLayoutManager(context)
+                recyclerView.layoutManager = LinearLayoutManager(context)
             } else {
-                view.layoutManager = GridLayoutManager(context, mColumnCount)
+                recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
+            recyclerView.adapter = InformationUniqueRecyclerViewAdapter(categories, mListener)
 
             // Récuperer les catégories de l'API
             CATEGORIE_URL.httpGet().responseJson{request, response, result ->
-                view.adapter = InformationUniqueRecyclerViewAdapter(createCategorieList(result.get()), mListener)
+                when(response.httpStatusCode){
+                    200 ->{
+                        createCategorieList(result.get())
+                        recyclerView.adapter.notifyDataSetChanged()
+
+                    }
+                }
             }
         }
         return view
     }
 
-    fun createCategorieList(json: Json) : List<Categorie>{
-        var categories = mutableListOf<Categorie>()
+    fun createCategorieList(json: Json) {
+
         val tabJson = json.array()
+
         for (i in 0.. (tabJson.length() -1))
         {
             categories.add(Categorie(Json(tabJson[i].toString())))
         }
-        return categories
     }
 
 
