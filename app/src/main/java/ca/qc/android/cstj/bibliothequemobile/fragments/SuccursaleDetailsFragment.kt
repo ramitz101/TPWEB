@@ -30,13 +30,13 @@ class SuccursaleDetailsFragment(private val href:String) : Fragment() {
             when(response.httpStatusCode){
                 200-> {
                     val succursale = Succursale(result.get())
-                    lblNom.text = " : "+succursale.nom
+                    lblTitre.text = succursale.ville+" : "+succursale.nom
                     lblAdresse.text = succursale.adresse
-                    lblVille.text = succursale.ville
+                    //lblVille.text = succursale.ville
                     lblCodePostal.text = succursale.codePostal
-                    lblProvince.text = "("+succursale.province+")"
-                    lblTelephone.text = "Téléphone: "+succursale.telephone
-                    lblTelecopieur.text = "Télécopieur: "+ succursale.telecopieur
+                    lblProvince.text = succursale.ville+"  ("+succursale.province+")"
+                    lblTelephone.text = "TÃ©lÃ©phone: "+succursale.telephone
+                    lblTelecopieur.text = "TÃ©lÃ©copieur: "+ succursale.telecopieur
                     lblInformation.text = succursale.information
                 }
                 404 ->{
