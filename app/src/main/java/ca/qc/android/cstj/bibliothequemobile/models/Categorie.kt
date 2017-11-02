@@ -10,9 +10,9 @@ class Categorie(jsonObject: Json) : Item() {
     }
 
     override fun getUrl():String {
-        return uuid
+        return href
     }
 
     var nom : String = jsonObject.obj().getString("categorie")
-    var uuid : String = jsonObject.obj().getString("uuid")
+    var href : String = jsonObject.obj().getString("href")
 }

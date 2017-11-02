@@ -9,11 +9,11 @@ class Succursale(jsonObject: Json) : Item() {
     }
 
     override fun getUrl():String {
-        return uuid
+        return href
     }
 
     var nom : String = jsonObject.obj().getString("appelatif")
-    var uuid: String = jsonObject.obj().getString("uuid")
+    var href : String = jsonObject.obj().getString("href")
     var adresse : String = jsonObject.obj().getString("adresse")
     var ville : String = jsonObject.obj().getString("ville")
     var codePostal : String = jsonObject.obj().getString("codePostal")

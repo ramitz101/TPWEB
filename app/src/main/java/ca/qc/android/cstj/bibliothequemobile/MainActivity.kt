@@ -16,6 +16,10 @@ import ca.qc.android.cstj.bibliothequemobile.models.Item
 import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import android.content.Intent
+import ca.qc.android.cstj.bibliothequemobile.R.id.toolbar
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique {
 
@@ -23,10 +27,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Succursale
         if(item is Succursale) {
 
+
+            nav_view.setNavigationItemSelectedListener(this)
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.uuid))
+                transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.getUrl()))
+
                 transaction.addToBackStack("DetailsSuccursale")
                 transaction.commit()
             }.run()

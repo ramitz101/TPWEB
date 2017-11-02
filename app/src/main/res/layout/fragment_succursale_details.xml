@@ -2,13 +2,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleDetailsFragment"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/lblNom"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="75dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblVille"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+
+             />
+        <TextView
+            android:id="@+id/lblNom"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:gravity="start|center"
+            />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="75dp"
+        android:textAlignment="center"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblAdresse"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+
+                />
+            <TextView
+                android:id="@+id/lblProvince"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/lblCodePostal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="150dp"
+
+        android:orientation="vertical">>
+
+        <TextView
+            android:id="@+id/lblTelephone"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            />
+        <TextView
+            android:id="@+id/lblTelecopieur"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="200dp"
+
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblInformation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
 
 </FrameLayout>
