@@ -20,12 +20,12 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
 
 
-class LivreListFragment : Fragment() {
+class LivreListFragment(private val href:String) : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
     private var livres = mutableListOf<Livre>()
-
+    private val url = href+"/livres"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class LivreListFragment : Fragment() {
             recyclerView.adapter = LivreRecyclerViewAdapter(livres ,mListener)
 
 
-            LIVRE_URL.httpGet().responseJson { request, response, result ->
+            url.httpGet().responseJson { request, response, result ->
                 when(response.httpStatusCode){
                     200->{
                         createLivreList(result.get())
@@ -106,12 +106,12 @@ class LivreListFragment : Fragment() {
         private val ARG_COLUMN_COUNT = "column-count"
 
         // TODO: Customize parameter initialization
-        fun newInstance(columnCount: Int): LivreListFragment {
-            val fragment = LivreListFragment()
+        /*fun newInstance(columnCount: Int): LivreListFragment {
+            val fragment = LivreListFragment(href)
             val args = Bundle()
             args.putInt(ARG_COLUMN_COUNT, columnCount)
             fragment.arguments = args
             return fragment
-        }
+        }*/
     }
 }

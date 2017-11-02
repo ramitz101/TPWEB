@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             nav_view.setNavigationItemSelectedListener(this)
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
-                transaction.replace(R.id.contentFrame, LivreListFragment())
+                transaction.replace(R.id.contentFrame, LivreListFragment(item.href))
                 transaction.addToBackStack("ListeLivreCategorie")
                 transaction.commit()
             }.run()
