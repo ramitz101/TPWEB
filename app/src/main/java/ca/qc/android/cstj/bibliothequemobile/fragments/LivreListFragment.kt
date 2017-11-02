@@ -107,7 +107,7 @@ class LivreListFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Livre?)
+        fun onListFragmentInteraction(livre: Livre?)
     }
 
     companion object {

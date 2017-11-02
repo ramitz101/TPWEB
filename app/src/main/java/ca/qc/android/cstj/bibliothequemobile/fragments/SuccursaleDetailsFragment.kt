@@ -32,7 +32,6 @@ class SuccursaleDetailsFragment(private val href:String) : Fragment() {
                     val succursale = Succursale(result.get())
                     lblTitre.text = succursale.ville+" : "+succursale.nom
                     lblAdresse.text = succursale.adresse
-                    //lblVille.text = succursale.ville
                     lblCodePostal.text = succursale.codePostal
                     lblProvince.text = succursale.ville+"  ("+succursale.province+")"
                     lblTelephone.text = "Téléphone: "+succursale.telephone

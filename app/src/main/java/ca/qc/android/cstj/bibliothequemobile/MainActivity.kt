@@ -14,11 +14,12 @@ import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleDetailsFragment
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.bibliothequemobile.models.Item
 import ca.qc.android.cstj.bibliothequemobile.models.Succursale
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import android.content.Intent
-import ca.qc.android.cstj.bibliothequemobile.R.id.toolbar
 
+import ca.qc.android.cstj.bibliothequemobile.fragments.LivreListFragment
+import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique {
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             nav_view.setNavigationItemSelectedListener(this)
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
-                //transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.href))
                 transaction.addToBackStack("DetailsSuccursale")
                 transaction.commit()
@@ -39,6 +39,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
         //Categorie
+        if(item is Categorie)
+        {
+            nav_view.setNavigationItemSelectedListener(this)
+            Runnable {
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.contentFrame, LivreListFragment())
+                transaction.addToBackStack("ListeLivreCategorie")
+                transaction.commit()
+            }.run()
+        }
 
     }
 

@@ -25,12 +25,12 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.mItem = mValues[position]
+        holder.livre = mValues[position]
        // holder.mIdView.text = mValues[position].id
         //holder.mContentView.text = mValues[position].content
 
         holder.mView.setOnClickListener {
-            mListener?.onListFragmentInteraction(holder.mItem)
+            mListener?.onListFragmentInteraction(holder.livre)
         }
     }
 
@@ -39,17 +39,13 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        //val mIdView: TextView
-        //val mContentView: TextView
-        var mItem: Livre? = null
 
-        init {
-            //mIdView = mView.findViewById(R.id.id) as TextView
-            //mContentView = mView.findViewById(R.id.content) as TextView
+        var livre: Livre? = null
+        fun bind(livres: Livre){
+            this.livre = livre
+
+
         }
 
-        //override fun toString(): String {
-            //return super.toString() + " '" + mContentView.text + "'"
-        //}
     }
 }
