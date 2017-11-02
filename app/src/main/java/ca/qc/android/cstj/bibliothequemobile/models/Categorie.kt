@@ -13,6 +13,7 @@ class Categorie(jsonObject: Json) : Item() {
         return href
     }
 
+
     var nom : String = jsonObject.obj().getString("categorie")
     var href : String = jsonObject.obj().getString("href")
 }

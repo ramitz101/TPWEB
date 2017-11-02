@@ -12,6 +12,7 @@ class Succursale(jsonObject: Json) : Item() {
         return href
     }
 
+
     var nom : String = jsonObject.obj().getString("appelatif")
     var href : String = jsonObject.obj().getString("href")
     var adresse : String = jsonObject.obj().getString("adresse")
@@ -21,5 +22,7 @@ class Succursale(jsonObject: Json) : Item() {
     var telephone : String = jsonObject.obj().getString("telephone")
     var telecopieur : String = jsonObject.obj().getString("telecopieur")
     var information : String = jsonObject.obj().getString("information")
+
+
 
 }

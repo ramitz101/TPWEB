@@ -6,6 +6,7 @@ import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.helpers.SUCCURSALE_URL
@@ -34,11 +35,9 @@ class SuccursaleDetailsFragment(private val href:String) : Fragment() {
                     lblVille.text = succursale.ville
                     lblCodePostal.text = succursale.codePostal
                     lblProvince.text = "("+succursale.province+")"
-                    lblTelephone.text = "TÃ©lÃ©phone: "+succursale.telephone
-                    lblTelecopieur.text = "TÃ©lÃ©copieur: "+ succursale.telecopieur
+                    lblTelephone.text = "Téléphone: "+succursale.telephone
+                    lblTelecopieur.text = "Télécopieur: "+ succursale.telecopieur
                     lblInformation.text = succursale.information
-
-
                 }
                 404 ->{
 
