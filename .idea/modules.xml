@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://D:\TPWEB\BIbliothequeMobile.iml" filepath="D:\TPWEB\BIbliothequeMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/TPWEB.iml" filepath="$PROJECT_DIR$/TPWEB.iml" />
+      <module fileurl="file://D:\Android\TPWEB\TPWEB.iml" filepath="D:\Android\TPWEB\TPWEB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Android\TPWEB\app\app.iml" filepath="D:\Android\TPWEB\app\app.iml" />
     </modules>
   </component>
 </project>
