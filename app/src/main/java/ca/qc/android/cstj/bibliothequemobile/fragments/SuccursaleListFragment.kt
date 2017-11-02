@@ -65,6 +65,7 @@ class SuccursaleListFragment : Fragment() {
 
     fun createSuccursaleList(json: Json){
 
+        succursales.clear()
         val tabJson = json.array()
 
         for(i in 0.. (json.array().length()-1))
