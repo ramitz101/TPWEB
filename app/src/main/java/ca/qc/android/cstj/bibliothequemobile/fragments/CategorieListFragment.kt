@@ -70,6 +70,7 @@ class CategorieListFragment : Fragment() {
 
     fun createCategorieList(json: Json) {
 
+        categories.clear()
         val tabJson = json.array()
 
         for (i in 0.. (tabJson.length() -1))

@@ -55,6 +55,7 @@ class LivreListFragment(private val href:String) : Fragment() {
                 when(response.httpStatusCode){
                     200->{
                         createLivreList(result.get())
+                        recyclerView.adapter.notifyDataSetChanged()
                     }
                 }
             }
@@ -64,6 +65,7 @@ class LivreListFragment(private val href:String) : Fragment() {
 
     fun createLivreList(json: Json) {
 
+        livres.clear()
         val tabJson = json.array()
 
         for(i in 0.. (tabJson.length() -1 )) {
@@ -96,7 +98,6 @@ class LivreListFragment(private val href:String) : Fragment() {
      * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
      */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onListFragmentInteraction(livre: Livre?)
     }
 
@@ -107,7 +108,7 @@ class LivreListFragment(private val href:String) : Fragment() {
 
         // TODO: Customize parameter initialization
         /*fun newInstance(columnCount: Int): LivreListFragment {
-            val fragment = LivreListFragment(href)
+            val fragment = LivreListFragment(url)
             val args = Bundle()
             args.putInt(ARG_COLUMN_COUNT, columnCount)
             fragment.arguments = args

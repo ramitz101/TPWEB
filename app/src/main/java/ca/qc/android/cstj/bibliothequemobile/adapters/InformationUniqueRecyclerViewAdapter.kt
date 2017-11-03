@@ -4,13 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import ca.qc.android.cstj.bibliothequemobile.R
 
-//import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
-import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 import ca.qc.android.cstj.bibliothequemobile.models.Item
-import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 import kotlinx.android.synthetic.main.card_item.view.*
 
 

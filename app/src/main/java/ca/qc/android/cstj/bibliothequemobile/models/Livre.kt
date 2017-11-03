@@ -21,6 +21,5 @@ class Livre(jsonObject: Json) : Item() {
     var sujet : String = jsonObject.obj().getString("sujet")
     var ISBN : String = jsonObject.obj().getString("ISBN")
     var urlImg : String = jsonObject.obj().getString("urlImg")
-    var idCategorie : Int = jsonObject.obj().getInt("idCategorie")
 
 }
