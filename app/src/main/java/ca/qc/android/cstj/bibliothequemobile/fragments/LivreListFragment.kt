@@ -63,7 +63,7 @@ class LivreListFragment(private val href:String) : Fragment() {
         return view
     }
 
-    fun createLivreList(json: Json) {
+    fun createLivreList(json: Json){
 
         livres.clear()
         val tabJson = json.array()

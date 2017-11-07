@@ -2,7 +2,6 @@ package ca.qc.android.cstj.bibliothequemobile
 
 import android.app.FragmentManager
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -11,16 +10,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
-import ca.qc.android.cstj.bibliothequemobile.fragments.CategorieListFragment
-import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleDetailsFragment
-import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleListFragment
+import ca.qc.android.cstj.bibliothequemobile.fragments.*
 import ca.qc.android.cstj.bibliothequemobile.models.Item
 import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-import ca.qc.android.cstj.bibliothequemobile.fragments.LivreListFragment
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 
@@ -48,8 +44,13 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     }
 
     override fun onListFragmentInteraction(livre: Livre?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+        nav_view.setNavigationItemSelectedListener(this)
+        Runnable {
+            val transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.contentFrame, LivreDetailsFragment(livre!!.href))
+            transaction.addToBackStack("DetailsLivre")
+            transaction.commit()
+        }.run()
     }
 
     override fun onListFragmentInteraction(item: Item?) {
