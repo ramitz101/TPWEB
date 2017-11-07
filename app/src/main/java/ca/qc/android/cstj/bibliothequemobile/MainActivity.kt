@@ -2,6 +2,7 @@ package ca.qc.android.cstj.bibliothequemobile
 
 import android.app.FragmentManager
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import android.widget.Toolbar
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
 import ca.qc.android.cstj.bibliothequemobile.fragments.*
 import ca.qc.android.cstj.bibliothequemobile.models.Item
@@ -19,9 +21,13 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
+import android.content.Intent
+import ca.qc.android.cstj.bibliothequemobile.R.layout.activity_main
 
 
 class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique, LivreListFragment.OnListFragmentInteractionListener {
+
+
     override fun onBackStackChanged() {
 
         if(fragmentManager.backStackEntryCount > 0) {
@@ -59,15 +65,20 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
 
  //https://stackoverflow.com/questions/35810229/how-to-display-and-set-click-event-on-back-arrow-on-toolbar
 
-            nav_view.setNavigationItemSelectedListener(this)
 
-            toolbar.setNavigationIcon(R.drawable.arrowhead_left)
-            /*setSupportActionBar(toolbar)
-            val actionBar = supportActionBar
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true)
-                actionBar.setDisplayHomeAsUpEnabled(true)
-            }*/
+            /*setContentView(R.layout.activity_main)
+            //val actionBar = actionBar
+            setSupportActionBar(toolbar)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            */
+
+            //val actionBar = actionBar
+            //actionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+            nav_view.setNavigationItemSelectedListener(this)
+            //toolbar.setNavigationIcon(R.drawable.arrowhead_left)
+
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.href))
@@ -94,7 +105,12 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+
+        val actionBar = actionBar
+        //actionBar!!.setDisplayHomeAsUpEnabled(true)
+        //actionBar!!.setHomeButtonEnabled(true)
+
+
         fragmentManager.addOnBackStackChangedListener(this)
         toolbar.title = "Bibliothèque Mobile"
 
@@ -129,6 +145,12 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        if (item.itemId == android.R.id.home) {
+            onBackPressed();    //Call the back button's method
+            return true;
+        }
+
         when (item.itemId) {
             R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
