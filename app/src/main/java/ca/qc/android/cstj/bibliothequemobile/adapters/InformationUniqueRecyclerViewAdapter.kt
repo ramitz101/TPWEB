@@ -20,7 +20,7 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
         return ViewHolder(view)
     }
 
-     override fun onBindViewHolder(holder: ViewHolder, position:Int) {
+     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mValues[position])
          holder.mView.setOnClickListener{
              mListener!!.onListFragmentInteraction(holder.item)

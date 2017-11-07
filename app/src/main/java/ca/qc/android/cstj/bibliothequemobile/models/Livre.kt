@@ -13,7 +13,6 @@ class Livre(jsonObject: Json) : Item() {
         return href
     }
 
-
     var href : String = jsonObject.obj().getString("href")
     var titre : String = jsonObject.obj().getString("titre")
     var prix : Double = jsonObject.obj().getDouble("prix")
