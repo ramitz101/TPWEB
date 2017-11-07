@@ -1,5 +1,6 @@
 package ca.qc.android.cstj.bibliothequemobile
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
 import ca.qc.android.cstj.bibliothequemobile.fragments.CategorieListFragment
 import ca.qc.android.cstj.bibliothequemobile.fragments.SuccursaleDetailsFragment
@@ -23,7 +25,28 @@ import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique, LivreListFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique, LivreListFragment.OnListFragmentInteractionListener {
+    override fun onBackStackChanged() {
+
+        if(fragmentManager.backStackEntryCount > 0) {
+            val index = fragmentManager.backStackEntryCount - 1
+            val backEntry = fragmentManager.getBackStackEntryAt(index)
+
+            Toast.makeText(this,backEntry.name,Toast.LENGTH_LONG).show()
+            when(backEntry.name){
+                "DetailsSuccursale" -> toolbar.title = "Détails Succursale"
+                "ListSuccursale" -> toolbar.title = "Liste Succursale"
+                "ListCategorie" -> toolbar.title = "Liste Categorie"
+                "ListeLivreCategorie" -> toolbar.title = "Liste Livre"
+                //"DetailsLivre" -> toolbar.title = "Détails Livre"
+                else -> toolbar.title = "Bibliothèque Mobile"
+
+            }
+        }else{
+            toolbar.title = "Bibliothèque Mobile"
+        }
+    }
+
     override fun onListFragmentInteraction(livre: Livre?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
@@ -33,8 +56,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Succursale
         if(item is Succursale) {
 
+ //https://stackoverflow.com/questions/35810229/how-to-display-and-set-click-event-on-back-arrow-on-toolbar
 
             nav_view.setNavigationItemSelectedListener(this)
+
+            toolbar.setNavigationIcon(R.drawable.arrowhead_left)
+            /*setSupportActionBar(toolbar)
+            val actionBar = supportActionBar
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true)
+                actionBar.setDisplayHomeAsUpEnabled(true)
+            }*/
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment(item.href))
@@ -47,6 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(item is Categorie)
         {
             nav_view.setNavigationItemSelectedListener(this)
+            toolbar.title= "Catégorie"
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.contentFrame, LivreListFragment(item.href))
@@ -61,8 +94,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-
+        fragmentManager.addOnBackStackChangedListener(this)
+        toolbar.title = "Bibliothèque Mobile"
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
