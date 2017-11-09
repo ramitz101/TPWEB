@@ -54,6 +54,8 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
         return inflater.inflate(R.layout.fragment_livre_details, container, false)
     }
 
+
+
     fun createCommentaireList(json: Json) {
 
         commentaires.clear()
