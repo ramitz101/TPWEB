@@ -45,7 +45,7 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
             Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
 
             lblTitre.text = livre.titre
-            lblAuteur.text = livre.auteur
+            lblAuteur.text = "par " + livre.auteur
 
         }
 
