@@ -22,6 +22,9 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import ca.qc.android.cstj.bibliothequemobile.models.Categorie
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 import android.content.Intent
+import android.nfc.Tag
+import android.util.Log
+import android.view.Gravity
 import ca.qc.android.cstj.bibliothequemobile.R.layout.activity_main
 
 
@@ -37,10 +40,10 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
             Toast.makeText(this,backEntry.name,Toast.LENGTH_LONG).show()
             when(backEntry.name){
                 "DetailsSuccursale" -> toolbar.title = "Détails Succursale"
-                "ListSuccursale" -> toolbar.title = "Liste Succursale"
-                "ListCategorie" -> toolbar.title = "Liste Categorie"
+                "ListeSuccursale" -> toolbar.title = "Liste Succursale"
+                "ListeCategorie" -> toolbar.title = "Liste Catégorie"
                 "ListeLivreCategorie" -> toolbar.title = "Liste Livre"
-                //"DetailsLivre" -> toolbar.title = "Détails Livre"
+            //"DetailsLivre" -> toolbar.title = "Détails Livre"
                 else -> toolbar.title = "Bibliothèque Mobile"
 
             }
@@ -60,24 +63,10 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     }
 
     override fun onListFragmentInteraction(item: Item?) {
+        toolbar.setNavigationIcon(R.drawable.arrowhead_left)
         //Succursale
         if(item is Succursale) {
 
- //https://stackoverflow.com/questions/35810229/how-to-display-and-set-click-event-on-back-arrow-on-toolbar
-
-
-            /*setContentView(R.layout.activity_main)
-            //val actionBar = actionBar
-            setSupportActionBar(toolbar)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            */
-
-            //val actionBar = actionBar
-            //actionBar!!.setDisplayHomeAsUpEnabled(true)
-
-
-            nav_view.setNavigationItemSelectedListener(this)
-            //toolbar.setNavigationIcon(R.drawable.arrowhead_left)
 
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
@@ -90,12 +79,13 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         //Categorie
         if(item is Categorie)
         {
-            nav_view.setNavigationItemSelectedListener(this)
+
             toolbar.title= "Catégorie"
             Runnable {
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.contentFrame, LivreListFragment(item.href))
                 transaction.addToBackStack("ListeLivreCategorie")
+
                 transaction.commit()
             }.run()
         }
@@ -106,9 +96,6 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val actionBar = actionBar
-        //actionBar!!.setDisplayHomeAsUpEnabled(true)
-        //actionBar!!.setHomeButtonEnabled(true)
 
 
         fragmentManager.addOnBackStackChangedListener(this)
@@ -116,9 +103,47 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+
+        //fragmentManager.findFragmentByTag()
+
+
+        toggle.isDrawerIndicatorEnabled=false
+
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        toolbar.setNavigationIcon(R.drawable.images)
+
+
+        toggle.setToolbarNavigationClickListener  {
+            if(drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                drawer_layout.closeDrawer(GravityCompat.START)
+            } else {
+
+                if(fragmentManager.backStackEntryCount > 0) {
+
+                    val index = fragmentManager.backStackEntryCount - 1
+                    val backEntry = fragmentManager.getBackStackEntryAt(index)
+
+                    //Toast.makeText(this, backEntry.name, Toast.LENGTH_LONG).show()
+
+                    if (backEntry.name == "ListeSuccursale" || backEntry.name =="ListeCategorie") {
+                        drawer_layout.openDrawer(GravityCompat.START)
+                        toolbar.setNavigationIcon(R.drawable.images)
+
+                    } else {
+                        super.onBackPressed()
+                        if (fragmentManager.backStackEntryCount == 0 || fragmentManager.getBackStackEntryAt(index -1).name == "ListeCategorie" || fragmentManager.getBackStackEntryAt(index -1).name == "ListeSuccursale") {
+                            toolbar.setNavigationIcon(R.drawable.images)
+                        }
+
+                    }
+                } else {
+                    drawer_layout.openDrawer(GravityCompat.START)
+                    toolbar.setNavigationIcon(R.drawable.images)
+                }
+            }
+        }
         nav_view.setNavigationItemSelectedListener(this)
 
         val transaction = fragmentManager.beginTransaction()
@@ -128,11 +153,40 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     }
 
     override fun onBackPressed() {
+
+
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if(fragmentManager.backStackEntryCount > 0) {
+
+                val index = fragmentManager.backStackEntryCount - 1
+                val backEntry = fragmentManager.getBackStackEntryAt(index)
+
+                //Toast.makeText(this, backEntry.name, Toast.LENGTH_LONG).show()
+
+                if (backEntry.name == "ListeSuccursale" || backEntry.name =="ListeCategorie") {
+                    drawer_layout.openDrawer(GravityCompat.START)
+                    toolbar.setNavigationIcon(R.drawable.images)
+
+                } else {
+                    super.onBackPressed()
+                    if (fragmentManager.backStackEntryCount == 0 || fragmentManager.getBackStackEntryAt(index -1).name == "ListeCategorie" || fragmentManager.getBackStackEntryAt(index -1).name == "ListeSuccursale") {
+                        toolbar.setNavigationIcon(R.drawable.images)
+
+                        //fragmentManager.back fragmentManager.getBackStackEntryAt(0)
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+
+                }
+            } else {
+                super.onBackPressed()
+            }
         }
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
