@@ -68,7 +68,11 @@
             android:layout_height="wrap_content"></ListView>
 
         <EditText
-            android:id="@+id/txtNomPrenom"
+            android:id="@+id/txtPrenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/txtNom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import ca.qc.android.cstj.bibliothequemobile.R
 
 import ca.qc.android.cstj.bibliothequemobile.fragments.LivreListFragment.OnListFragmentInteractionListener
+import ca.qc.android.cstj.bibliothequemobile.helpers.COMMENTAIRE_URL
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_livre.view.*
@@ -37,6 +38,7 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
         var lblAuteur = mView.lblAuteur
         var imgLivre = mView.imgLivre
 
+
         var livre: Livre? = null
 
         fun bind(livre: Livre){
@@ -46,6 +48,7 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
 
             lblTitre.text = livre.titre
             lblAuteur.text = "par " + livre.auteur
+
 
         }
 

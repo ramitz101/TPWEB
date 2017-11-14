@@ -12,13 +12,18 @@ import android.view.ViewGroup
 import android.widget.ListView
 
 import ca.qc.android.cstj.bibliothequemobile.R
+import ca.qc.android.cstj.bibliothequemobile.helpers.COMMENTAIRE_URL
 import ca.qc.android.cstj.bibliothequemobile.models.Commentaire
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.httpPost
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_livre_details.*
+import kotlinx.android.synthetic.main.fragment_livre_details.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class LivreDetailsFragment(private val href: String) : Fragment() {
@@ -28,13 +33,38 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_livre_details, container, false)
+
+        view.btnSubmit.setOnClickListener{
+
+
+            var calendrier = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val date = dateFormat.format(calendrier.getTime())
+            var commentaire = Commentaire(date.toString(),txtMessage.text.toString(),starRatingBar.rating.toString().toDouble(),txtNom.toString(),txtPrenom.text.toString())
+            COMMENTAIRE_URL.httpPost()
+                    .header("Content-Type" to "application/json")
+                    .body(commentaire.toJson()).responseJson{_,response,_->
+                when(response.statusCode){
+                    201->{
+                        //updateCommentaire()
+                    }
+                }
+            }
+
+
+        }
+
+
+
         // Inflate the layout for this fragment
         var url = href + "?expand=commentaires"
         url.httpGet().responseJson{ request, response, result ->
-            when(response.httpStatusCode){
+            when(response.statusCode){
                 200-> {
                     val livre = Livre(result.get())
-
+                    COMMENTAIRE_URL = livre.href + "?expand=commentaires"
                     Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
 
                     lblPrix.text = livre.prix.toString() + " $"
@@ -51,7 +81,7 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
             }
         }
 
-        return inflater.inflate(R.layout.fragment_livre_details, container, false)
+        return view
     }
 
 

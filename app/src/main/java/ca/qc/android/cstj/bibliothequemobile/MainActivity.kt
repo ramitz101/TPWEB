@@ -1,6 +1,7 @@
 package ca.qc.android.cstj.bibliothequemobile
 
 import android.app.FragmentManager
+import android.app.Service
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.design.widget.NavigationView
@@ -13,19 +14,27 @@ import android.widget.Toast
 import android.widget.Toolbar
 import ca.qc.android.cstj.bibliothequemobile.adapters.OnListFragmentInformationUnique
 import ca.qc.android.cstj.bibliothequemobile.fragments.*
-import ca.qc.android.cstj.bibliothequemobile.models.Item
-import ca.qc.android.cstj.bibliothequemobile.models.Succursale
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-import ca.qc.android.cstj.bibliothequemobile.models.Categorie
-import ca.qc.android.cstj.bibliothequemobile.models.Livre
 import android.content.Intent
 import android.nfc.Tag
 import android.util.Log
 import android.view.Gravity
+import android.widget.DatePicker
 import ca.qc.android.cstj.bibliothequemobile.R.layout.activity_main
+import ca.qc.android.cstj.bibliothequemobile.models.*
+import ca.qc.android.cstj.bibliothequemobile.helpers.*
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.fuel.httpPost
+import kotlinx.android.synthetic.main.fragment_livre_details.*
+import java.sql.Date
+import java.sql.Time
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Calendar
 
 
 class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, OnListFragmentInformationUnique, LivreListFragment.OnListFragmentInteractionListener {
@@ -149,6 +158,14 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
         transaction.commit()
+
+
+
+
+
+    }
+
+    private fun updateCommentaire(){
 
     }
 

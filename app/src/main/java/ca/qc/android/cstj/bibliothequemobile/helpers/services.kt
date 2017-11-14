@@ -8,5 +8,7 @@ var SUCCURSALE_URL = "https://tp1-samuelbelisle.c9users.io/succursales"
 
 var CATEGORIE_URL = "https://tp1-samuelbelisle.c9users.io/categories"
 
+var COMMENTAIRE_URL = ""
+
 
 
