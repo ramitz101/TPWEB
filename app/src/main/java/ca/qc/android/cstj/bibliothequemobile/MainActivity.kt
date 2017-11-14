@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
             val index = fragmentManager.backStackEntryCount - 1
             val backEntry = fragmentManager.getBackStackEntryAt(index)
 
-            Toast.makeText(this,backEntry.name,Toast.LENGTH_LONG).show()
+
             when(backEntry.name){
                 "DetailsSuccursale" -> toolbar.title = "Détails Succursale"
                 "ListeSuccursale" -> toolbar.title = "Liste Succursale"
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
                     val index = fragmentManager.backStackEntryCount - 1
                     val backEntry = fragmentManager.getBackStackEntryAt(index)
 
-                    //Toast.makeText(this, backEntry.name, Toast.LENGTH_LONG).show()
+
 
                     if (backEntry.name == "ListeSuccursale" || backEntry.name =="ListeCategorie") {
                         drawer_layout.openDrawer(GravityCompat.START)
@@ -163,7 +163,6 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
                 val index = fragmentManager.backStackEntryCount - 1
                 val backEntry = fragmentManager.getBackStackEntryAt(index)
 
-                //Toast.makeText(this, backEntry.name, Toast.LENGTH_LONG).show()
 
                 if (backEntry.name == "ListeSuccursale" || backEntry.name =="ListeCategorie") {
                     drawer_layout.openDrawer(GravityCompat.START)
