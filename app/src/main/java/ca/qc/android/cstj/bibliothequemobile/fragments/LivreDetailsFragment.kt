@@ -72,23 +72,17 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
                     Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
 
-
-
                     lblPrix.text = livre.prix.toString() + " $"
                     lblAuteur.text = livre.auteur
                     lblSujet.text = livre.sujet
                     lblISBN.text = "ISBN: " + livre.ISBN
 
                     lblCommentaires.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-
                 }
                 404-> {
-
                 }
             }
-
         }
-
         return view
     }
 
