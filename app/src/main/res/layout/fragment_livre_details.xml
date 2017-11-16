@@ -127,10 +127,7 @@
             android:textColor="#000"
             android:text="Commentaire:"
             android:textSize="15dp" />
-        <EditText
-            android:id="@+id/txtNom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
         <EditText
             android:id="@+id/txtMessage"
             android:layout_width="match_parent"

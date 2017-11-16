@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.helpers.COMMENTAIRE_URL
@@ -35,20 +36,24 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_livre_details, container, false)
-
+        var url = href + "?expand=commentaires"
+        var urlCommentaire = href + "/commentaires"
         view.btnSubmit.setOnClickListener{
 
 
             var calendrier = Calendar.getInstance()
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
             val date = dateFormat.format(calendrier.getTime())
-            var commentaire = Commentaire(date.toString(),txtMessage.text.toString(),starRatingBar.rating.toString().toDouble(),txtNom.toString(),txtPrenom.text.toString())
-            COMMENTAIRE_URL.httpPost()
+            var commentaire = Commentaire(date.toString(),txtMessage.text.toString(),starRatingBar.rating.toString().toDouble(),txtNom.text.toString(),txtPrenom.text.toString())
+            urlCommentaire.httpPost()
                     .header("Content-Type" to "application/json")
                     .body(commentaire.toJson()).responseJson{_,response,_->
                 when(response.statusCode){
                     201->{
-                        //updateCommentaire()
+                        txtMessage.text = null
+                        txtNom.text = null
+                        txtPrenom.text = null
+                        starRatingBar.rating= 0F
                     }
                 }
             }
@@ -59,13 +64,15 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
 
         // Inflate the layout for this fragment
-        var url = href + "?expand=commentaires"
+
         url.httpGet().responseJson{ request, response, result ->
             when(response.statusCode){
                 200-> {
                     val livre = Livre(result.get())
-                    COMMENTAIRE_URL = livre.href + "?expand=commentaires"
+
                     Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
+
+
 
                     lblPrix.text = livre.prix.toString() + " $"
                     lblAuteur.text = livre.auteur
@@ -79,6 +86,7 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
                 }
             }
+
         }
 
         return view
