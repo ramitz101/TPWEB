@@ -32,12 +32,15 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
     private var commentaires = mutableListOf<Commentaire>()
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_livre_details, container, false)
         var url = href + "?expand=commentaires"
         var urlCommentaire = href + "/commentaires"
+
+        //lstCommentaires.adapter =
         view.btnSubmit.setOnClickListener{
 
 
@@ -69,7 +72,8 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
             when(response.statusCode){
                 200-> {
                     val livre = Livre(result.get())
-
+                    createCommentaireList(result.get())
+                    lstCommentaires.adapter.notifyDataSetChanged()
                     Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
 
 
@@ -97,11 +101,14 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
     fun createCommentaireList(json: Json) {
 
         commentaires.clear()
-        var tabJson = json.array()
+        //var tabJson = json.array()
+        var tabJson = json.obj().getJSONArray("commentaires")
+
 
         for (i in 0.. (tabJson.length() -1)){
             commentaires.add(Commentaire((Json(tabJson[i] .toString()))))
         }
+
 
     }
 /*
