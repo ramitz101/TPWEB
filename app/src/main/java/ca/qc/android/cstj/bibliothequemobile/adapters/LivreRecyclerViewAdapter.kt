@@ -34,16 +34,19 @@ class LivreRecyclerViewAdapter(private val mValues: List<Livre>, private val mLi
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
+        // Variables
         var lblTitre = mView.lblTitre
         var lblAuteur = mView.lblAuteur
         var imgLivre = mView.imgLivre
 
-
         var livre: Livre? = null
 
+
+        // Binding des livres
         fun bind(livre: Livre){
             this.livre = livre
 
+            // Image
             Picasso.with(imgLivre.context).load(livre.urlImg).placeholder(R.drawable.spinner).fit().centerInside().into(imgLivre)
 
             lblTitre.text = livre.titre

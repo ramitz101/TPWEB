@@ -39,8 +39,8 @@ class SuccursaleDetailsFragment(private val href:String) : Fragment() {
                     lblTelecopieur.text = "Télécopieur: "+ succursale.telecopieur
                     lblInformation.text = succursale.information
                 }
-                404 ->{
-
+                404-> {
+                    Toast.makeText(this.context, "Erreur: ressource non trouvée!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

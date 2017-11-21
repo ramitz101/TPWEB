@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.LivreRecyclerViewAdapter
@@ -57,12 +58,20 @@ class LivreListFragment(private val href:String) : Fragment() {
                         createLivreList(result.get())
                         recyclerView.adapter.notifyDataSetChanged()
                     }
+                    // Aucun livre dans la catégorie
+                    204->{
+                        Toast.makeText(this.context, "Cette catégorie ne contient aucun livre", Toast.LENGTH_LONG).show()
+                    }
+                    404-> {
+                        Toast.makeText(this.context, "Erreur: ressource non trouvée!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
         return view
     }
 
+    // Populate livres
     fun createLivreList(json: Json){
 
         livres.clear()

@@ -43,9 +43,12 @@ class InformationUniqueRecyclerViewAdapter(private val mValues:List<Item>,
     }
 
     inner class ViewHolder( val mView:View):RecyclerView.ViewHolder(mView) {
+
+        // Variables
         var lblNom = mView.lblNom
         var item: Item? = null
 
+        // Binding des succursales/catégories
         fun bind(item: Item) {
             this.item = item
             lblNom.text = item.getAffichage()

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
 import ca.qc.android.cstj.bibliothequemobile.adapters.InformationUniqueRecyclerViewAdapter
@@ -57,12 +58,19 @@ class SuccursaleListFragment : Fragment() {
                         createSuccursaleList(result.get())
                         recyclerView.adapter.notifyDataSetChanged()
                     }
+                    404-> {
+                        Toast.makeText(this.context, "Erreur: ressource non trouvée!", Toast.LENGTH_SHORT).show()
+                    }
+                    503-> {
+                        Toast.makeText(this.context, "Service temporairement indisponible ou en maintenance", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
         return view
     }
 
+    // Populate succursales
     fun createSuccursaleList(json: Json){
 
         succursales.clear()

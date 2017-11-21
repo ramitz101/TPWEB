@@ -35,25 +35,25 @@ class CommentaireRecyclerViewAdapter(private val mValues: List<Commentaire>) : R
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
-
-
-
+        // Variables
         var commentaire: Commentaire? = null
-
-
 
         var lblNomPrenom = mView.lblNomPrenom
         var lblDate = mView.lblDate
         var lblCommentaire = mView.lblCommentaire
         var rating = mView.ratingBar
 
+        // Binding du commmentaire
         fun bind(commentaire: Commentaire){
             this.commentaire = commentaire
+
+            // Formatage de la date
             var simpleDateFormat = SimpleDateFormat("yyyy-mm-dd")
             simpleDateFormat.timeZone = TimeZone.getDefault()
             val maDate = simpleDateFormat.parse(commentaire.dateCommentaire)
-            lblCommentaire.text = commentaire.message
 
+            // Binding
+            lblCommentaire.text = commentaire.message
             lblDate.text = simpleDateFormat.format(maDate)
             lblNomPrenom.text = commentaire.nom + " " + commentaire.prenom
             rating.rating = commentaire.etoile.toFloat()

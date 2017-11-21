@@ -32,25 +32,37 @@ import java.util.*
 
 
 class LivreDetailsFragment(private val href: String) : Fragment() {
+
+    // liste des commentaires
     var commentaires = mutableListOf<Commentaire>()
+
+    // S'exécute une fois la view créé
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
-
+        // On crée l'adapter pour la liste de commentaires
         lstCommentaires.layoutManager = LinearLayoutManager(this.context)
         lstCommentaires.adapter = CommentaireRecyclerViewAdapter(commentaires)
 
         var url = href + "?expand=commentaires"
         var urlCommentaire = href + "/commentaires"
 
-        //lstCommentaires.adapter =
+
+        // Bouton ajout de commentaires
         view!!.btnSubmit.setOnClickListener{
 
-            if(txtMessage.text != null && txtPrenom.text != null && txtNom.text != null ) {
 
+            // Vérifie que les champs nom/prenom/commentaire ne sont pas vides
+            if(txtMessage.text.toString() != "" && txtPrenom.text.toString() != "" && txtNom.text.toString() != "" ) {
+
+                // Get curent date
                 var calendrier = Calendar.getInstance()
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 val date = dateFormat.format(calendrier.getTime())
+
+                // Construction du commentaire
                 var commentaire = Commentaire(date.toString(), txtMessage.text.toString(), starRatingBar.rating.toString().toDouble(), txtNom.text.toString(), txtPrenom.text.toString())
+
+                // POST
                 urlCommentaire.httpPost()
                         .header("Content-Type" to "application/json")
                         .body(commentaire.toJson()).responseJson { _, response, _ ->
@@ -67,8 +79,8 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
                     }
                 }
 
-            }else{
-                Toast.makeText(this.context,"Champs manquant",Toast.LENGTH_LONG).show()
+            }else{ // Les champs sont vides
+                Toast.makeText(this.context,"Champs manquant",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -92,6 +104,7 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
                     lblCommentaires.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 }
                 404-> {
+                    Toast.makeText(this.context, "Erreur: ressource non trouvée!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

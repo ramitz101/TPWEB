@@ -46,13 +46,13 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
             val index = fragmentManager.backStackEntryCount - 1
             val backEntry = fragmentManager.getBackStackEntryAt(index)
 
-
+            // Titres
             when(backEntry.name){
-                "DetailsSuccursale" -> toolbar.title = "Détails Succursale"
-                "ListeSuccursale" -> toolbar.title = "Liste Succursale"
-                "ListeCategorie" -> toolbar.title = "Liste Catégorie"
-                "ListeLivreCategorie" -> toolbar.title = "Liste Livre"
-            //"DetailsLivre" -> toolbar.title = "Détails Livre"
+                "DetailsSuccursale" -> toolbar.title = "Détails de la succursale"
+                "ListeSuccursale" -> toolbar.title = "Liste des succursales"
+                "ListeCategorie" -> toolbar.title = "Liste des catégories"
+                "ListeLivreCategorie" -> toolbar.title = "Liste des livres"
+                "DetailsLivre" -> toolbar.title = "Détails du livre"
                 else -> toolbar.title = "Bibliothèque Mobile"
 
             }
