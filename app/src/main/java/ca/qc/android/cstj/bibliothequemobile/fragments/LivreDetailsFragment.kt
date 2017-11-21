@@ -5,14 +5,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.app.Fragment
 import android.graphics.Paint
+import android.support.v7.widget.LinearLayoutManager
 import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
 
 import ca.qc.android.cstj.bibliothequemobile.R
+import ca.qc.android.cstj.bibliothequemobile.adapters.CommentaireRecyclerViewAdapter
 import ca.qc.android.cstj.bibliothequemobile.helpers.COMMENTAIRE_URL
 import ca.qc.android.cstj.bibliothequemobile.models.Commentaire
 import ca.qc.android.cstj.bibliothequemobile.models.Livre
@@ -21,6 +24,7 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_livre.view.*
 import kotlinx.android.synthetic.main.fragment_livre_details.*
 import kotlinx.android.synthetic.main.fragment_livre_details.view.*
 import java.text.SimpleDateFormat
@@ -28,40 +32,44 @@ import java.util.*
 
 
 class LivreDetailsFragment(private val href: String) : Fragment() {
+    var commentaires = mutableListOf<Commentaire>()
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
 
-    private var commentaires = mutableListOf<Commentaire>()
+        lstCommentaires.layoutManager = LinearLayoutManager(this.context)
+        lstCommentaires.adapter = CommentaireRecyclerViewAdapter(commentaires)
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        val view = inflater.inflate(R.layout.fragment_livre_details, container, false)
         var url = href + "?expand=commentaires"
         var urlCommentaire = href + "/commentaires"
 
         //lstCommentaires.adapter =
-        view.btnSubmit.setOnClickListener{
+        view!!.btnSubmit.setOnClickListener{
 
+            if(txtMessage.text != null && txtPrenom.text != null && txtNom.text != null ) {
 
-            var calendrier = Calendar.getInstance()
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val date = dateFormat.format(calendrier.getTime())
-            var commentaire = Commentaire(date.toString(),txtMessage.text.toString(),starRatingBar.rating.toString().toDouble(),txtNom.text.toString(),txtPrenom.text.toString())
-            urlCommentaire.httpPost()
-                    .header("Content-Type" to "application/json")
-                    .body(commentaire.toJson()).responseJson{_,response,_->
-                when(response.statusCode){
-                    201->{
-                        txtMessage.text = null
-                        txtNom.text = null
-                        txtPrenom.text = null
-                        starRatingBar.rating= 0F
+                var calendrier = Calendar.getInstance()
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                val date = dateFormat.format(calendrier.getTime())
+                var commentaire = Commentaire(date.toString(), txtMessage.text.toString(), starRatingBar.rating.toString().toDouble(), txtNom.text.toString(), txtPrenom.text.toString())
+                urlCommentaire.httpPost()
+                        .header("Content-Type" to "application/json")
+                        .body(commentaire.toJson()).responseJson { _, response, _ ->
+                    when (response.statusCode) {
+                        201 -> {
+
+                            Toast.makeText(this.context, "Commentaire ajouté", Toast.LENGTH_LONG).show()
+
+                            txtMessage.text = null
+                            txtNom.text = null
+                            txtPrenom.text = null
+                            starRatingBar.rating = 0F
+                        }
                     }
                 }
+
+            }else{
+                Toast.makeText(this.context,"Champs manquant",Toast.LENGTH_LONG).show()
             }
-
-
         }
 
 
@@ -87,6 +95,19 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
                 }
             }
         }
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+
+
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_livre_details, container, false)
+
         return view
     }
 
@@ -101,9 +122,8 @@ class LivreDetailsFragment(private val href: String) : Fragment() {
 
         for (i in 0.. (tabJson.length() -1)){
             commentaires.add(Commentaire((Json(tabJson[i] .toString()))))
+
         }
-
-
     }
 /*
     companion object {

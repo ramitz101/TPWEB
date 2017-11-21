@@ -5,168 +5,147 @@
     tools:context="ca.qc.android.cstj.bibliothequemobile.fragments.LivreDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:paddingLeft="7dp"
-        android:paddingRight="7dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgLivre"
-                android:layout_width="120dp"
-                android:layout_height="160dp" />
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/lblPrix"
+                <ImageView
+                    android:id="@+id/imgLivre"
+                    android:layout_width="120dp"
+                    android:layout_height="160dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lblAuteur"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/lblPrix"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/lblSujet"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/lblAuteur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/lblISBN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/lblSujet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/lblISBN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:gravity="center"
-            android:text="Donner une note et votre avis l'expérience de lecture que vous avez eue."
-            android:textSize="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <TextView
-
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#000"
-                android:text="Nom: "
-                android:textSize="15dp"
-                android:layout_weight="1"/>
+                android:gravity="center"
+                android:text="Donner une note et votre avis l'expérience de lecture que vous avez eue."
+                android:textSize="15dp" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+
+                    android:id="@+id/txtNom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nom"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+                <EditText
+
+                    android:id="@+id/txtPrenom"
+                    android:layout_width="match_parent"
+                    android:hint="Prenom"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:layout_weight="1"
+                    android:inputType="text" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/txtMessage"
+                android:layout_width="match_parent"
+                android:hint="Commentaire"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RatingBar
+                    android:id="@+id/starRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="0.5" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Publier" />
+
+            </LinearLayout>
             <TextView
-
+                android:id="@+id/lblCommentaires"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#000"
-                android:text="Prénom: "
-                android:textSize="15dp"
-                android:layout_weight="1"/>
+                android:gravity="left"
+                android:text="Commentaires"
+                android:textSize="15dp" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-
-                android:id="@+id/txtNom"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lstCommentaires"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:layout_weight="1"
-                android:inputType="text" />
-            <EditText
+                tools:listitem="@layout/card_commentaire"
+                android:layout_height="350dp">
 
-                android:id="@+id/txtPrenom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:layout_weight="1"
-                android:inputType="text" />
-        </LinearLayout>
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:text="Commentaire:"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/txtMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="text" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RatingBar
-                android:id="@+id/starRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="0.5" />
-
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Publier" />
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/lblCommentaires"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:gravity="left"
-            android:text="Commentaires"
-            android:textSize="15dp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lstCommentaires"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
